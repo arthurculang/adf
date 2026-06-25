@@ -1,0 +1,40 @@
+# ADF Layout for "Acme Q2 Report".
+# Note: this file contains NO document text — only references to content node IDs.
+# Geometry units and page size come from manifest.json (612 x 792 pt, origin
+# bottom-left).
+
+@style {
+  .lead    { font: "Source Sans" 26pt bold; leading: 30pt; }
+  byline   { font: "Source Serif" 11pt italic; fill: #555555; }
+  h2       { font: "Source Sans" 16pt bold; space-before: 6pt; space-after: 8pt; }
+  body     { font: "Source Serif" 11pt; leading: 15pt; align: justify; }
+  table    { font: "Source Serif" 10pt; rule: 0.5pt #cccccc; }
+  .warning { fill: #FFF4E5; border-left: 3pt #E8A33D; pad: 8pt; font: "Source Serif" 10pt; }
+  figure   { caption: "Source Serif" 9pt italic #555555; }
+}
+
+# ---- Page 1: masthead, lede, hero figure ----
+page 1 {
+  frame masthead at 72 700 size 468 56 { place #title  style .lead align left }
+  frame byline   at 72 680 size 468 16 { place #byline style byline }
+
+  # The main body flow starts here and threads forward.
+  frame lede     at 72 470 size 468 196 { flow main from #rev-para }
+
+  frame hero     at 72 200 size 468 250 { place #fig-rev style figure }
+}
+
+# ---- Page 2: two-column body, table, callout, outlook ----
+page 2 {
+  frame col-a at 72  396 size 226 324 { flow main continued }
+  frame col-b at 314 396 size 226 324 { flow main continued }
+  chain col-a -> col-b ;
+
+  # The financial table and the guidance callout are placed explicitly so the
+  # author controls exactly where they sit; the surrounding prose flows around.
+  frame table-box   at 72 250 size 468 120 { place #fin-table     style table }
+  frame callout-box at 72 170 size 468 64  { place #guidance-note style .warning }
+
+  # Outlook closes the page, flowing the remaining main content.
+  frame outlook at 72 72 size 468 80 { flow main continued }
+}

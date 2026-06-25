@@ -1,0 +1,8 @@
+# Built ADF containers are regeneratable via examples/*/build.sh
+*.adf
+.DS_Store
+
+# Internal materials — never commit to this public repo
+/strategy/
+/HANDOFF.md
+*.zip

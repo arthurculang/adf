@@ -1,0 +1,42 @@
+{#title .lead}
+# Q2 Was a Good Quarter
+
+{#byline}
+Acme Research — June 25, 2026
+
+{#rev-para}
+Revenue grew 12% quarter over quarter, the fastest pace in two years. Cloud
+carried the result while Devices softened, and operating margin expanded by
+180 basis points as the cost program landed ahead of schedule.
+
+{#fig-rev}
+![Revenue by segment, Q1 vs Q2, in billions USD.](assets/chart-revenue.svg)
+
+{#seg-head}
+## Segment detail
+
+{#seg-para}
+Cloud reached $4.6B (up from $4.1B) on strong renewals and a full quarter of the
+Northwind acquisition. Devices slipped to $1.9B as the channel worked down
+inventory; we expect a return to growth in Q3 as the new line ships.
+
+{#fin-table}
+| Segment | Q1 ($B) | Q2 ($B) | QoQ   |
+|---------|--------:|--------:|------:|
+| Cloud   |     4.1 |     4.6 | +12%  |
+| Devices |     2.0 |     1.9 |  −5%  |
+| Total   |     6.1 |     6.5 |  +7%  |
+
+:::warning
+{#guidance-note}
+Forward guidance assumes no change to current tariff schedules. A material
+change would be disclosed in an 8-K.
+:::
+
+{#outlook-head}
+## Outlook
+
+{#outlook-para}
+We are raising full-year revenue guidance to a range of $26.5B–$27.0B and
+reiterating our margin target. The Q3 priorities are the Devices refresh and
+continued Cloud gross-margin expansion.

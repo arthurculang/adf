@@ -1,0 +1,48 @@
+{
+  "adf": "1.0",
+  "id": "urn:uuid:6f9619ff-8b86-d011-b42d-00cf4fc964ff",
+  "metadata": {
+    "title": "Acme Q2 Report",
+    "authors": ["Acme Research"],
+    "lang": "en",
+    "created": "2026-06-25",
+    "modified": "2026-06-25"
+  },
+  "geometry": {
+    "unit": "pt",
+    "size": [612, 792],
+    "margins": [72, 72, 72, 72]
+  },
+  "content": {
+    "primary": "content/main.adt",
+    "streams": ["content/main.adt"]
+  },
+  "layout": {
+    "primary": "layout/pages.adl",
+    "includes": []
+  },
+  "rendering": {
+    "engine": "adf-render/1.0",
+    "linebreak": "knuth-plass@1",
+    "hyphenation": "liang@1:en-us",
+    "fonts": [
+      {
+        "family": "Source Serif",
+        "style": "regular",
+        "file": "assets/fonts/SourceSerif-Regular.otf",
+        "metrics_hash": "sha256-PLACEHOLDER-serif-regular"
+      },
+      {
+        "family": "Source Sans",
+        "style": "bold",
+        "file": "assets/fonts/SourceSans-Bold.otf",
+        "metrics_hash": "sha256-PLACEHOLDER-sans-bold"
+      }
+    ]
+  },
+  "integrity": {
+    "content/main.adt": "sha256-RECOMPUTE-AT-BUILD",
+    "layout/pages.adl": "sha256-RECOMPUTE-AT-BUILD"
+  },
+  "conformance": "full"
+}

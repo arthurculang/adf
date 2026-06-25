@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="468" height="250" viewBox="0 0 468 250">
+  <rect width="468" height="250" fill="#ffffff"/>
+  <!-- Cloud Q1/Q2 -->
+  <rect x="80"  y="110" width="60" height="120" fill="#3b6ea5"/>
+  <rect x="150" y="90"  width="60" height="140" fill="#3b6ea5"/>
+  <!-- Devices Q1/Q2 -->
+  <rect x="280" y="170" width="60" height="60"  fill="#9bb7d4"/>
+  <rect x="350" y="175" width="60" height="55"  fill="#9bb7d4"/>
+  <text x="140" y="248" font-family="sans-serif" font-size="12" text-anchor="middle">Cloud</text>
+  <text x="370" y="248" font-family="sans-serif" font-size="12" text-anchor="middle">Devices</text>
+</svg>

@@ -1,0 +1,26 @@
+ADF — Agentic Document Format
+Copyright (c) 2026 the ADF authors
+
+This repository is dual-licensed by path:
+
+1. SPECIFICATION & DOCUMENTATION — CC-BY-4.0
+   Applies to: spec/, docs/, and this repository's README.md (and any other
+   prose documentation).
+   You may share and adapt this material for any purpose, including
+   commercially, provided you give appropriate credit.
+   Full text: LICENSES/CC-BY-4.0.txt
+   SPDX-License-Identifier: CC-BY-4.0
+
+2. CODE, EXAMPLES & MACHINE-READABLE ARTIFACTS — Apache-2.0
+   Applies to: examples/ (build scripts, .adt / .adl / manifest.json / mimetype
+   and assets) and any tooling added to this repository.
+   Full text: LICENSES/Apache-2.0.txt
+   SPDX-License-Identifier: Apache-2.0
+
+Notes
+- Implementing the ADF specification requires no separate license from the
+  authors. The Apache-2.0 grant (including its patent grant) additionally
+  covers the code in this repository.
+- Where a file's licensing is ambiguous, the path rules above govern; a file
+  may carry its own SPDX-License-Identifier header, which takes precedence for
+  that file.
