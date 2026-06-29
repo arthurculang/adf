@@ -1,0 +1,58 @@
+#!/usr/bin/env sh
+# adf-extract — print an ADF document's content layer as plain text.
+#
+# ADF's premise: a machine reader needs only the container's content stream,
+# never the layout. So the entire reader is essentially:
+#
+#     unzip -p FILE.adf content/main.adt
+#
+# This reference version is just manifest-aware: it asks the manifest which
+# stream is primary (and can list every declared stream) instead of assuming
+# the conventional path. The content layer is plain text by design, so there is
+# no decoding step beyond the ZIP extraction.
+#
+# Usage:
+#   adf-extract FILE.adf                # print the primary content stream
+#   adf-extract FILE.adf --all          # print every declared content stream
+#   adf-extract FILE.adf content/x.adt  # print one named stream
+set -eu
+
+adf=${1:-}
+if [ -z "$adf" ]; then
+  echo "usage: adf-extract FILE.adf [--all | STREAM]" >&2
+  exit 2
+fi
+if [ ! -f "$adf" ]; then
+  echo "adf-extract: no such file: $adf" >&2
+  exit 1
+fi
+
+manifest=$(unzip -p "$adf" manifest.json)
+
+# Resolve a value from the manifest's content object. Prefer a real JSON parse
+# (python3); fall back to the conventional default so the tool still works with
+# nothing but sh + unzip.
+content_field() {  # $1 = python statement over the content dict `c`
+  printf '%s' "$manifest" | python3 -c "import json,sys; c=json.load(sys.stdin)['content']; $1" 2>/dev/null
+}
+
+case "${2:-}" in
+  --all)
+    streams=$(content_field 'print("\n".join(c.get("streams") or [c["primary"]]))') || streams=""
+    [ -n "$streams" ] || streams="content/main.adt"
+    sep=""
+    for s in $streams; do
+      [ -z "$sep" ] || printf '\n'
+      sep=x
+      unzip -p "$adf" "$s"
+    done
+    ;;
+  "")
+    primary=$(content_field 'print(c["primary"])') || primary=""
+    [ -n "$primary" ] || primary="content/main.adt"
+    unzip -p "$adf" "$primary"
+    ;;
+  *)
+    unzip -p "$adf" "$2"
+    ;;
+esac

@@ -57,6 +57,7 @@ is no reflow, no media queries, no font fallback. A page is a page.
 - **[`spec/ADF-1.0-SPECIFICATION.md`](spec/ADF-1.0-SPECIFICATION.md)** — the normative specification.
 - **[`docs/token-economics.md`](docs/token-economics.md)** — why ADF is cheap to feed to a model, with worked numbers.
 - **[`examples/quarterly-report/`](examples/quarterly-report/)** — a real ADF document in source form, plus `build.sh` to pack it into a `.adf` container.
+- **[`tools/adf-extract`](tools/adf-extract)** — a tiny reference content reader; prints an `.adf`'s content stream(s) as plain text.
 - **[`docs/design-rationale.md`](docs/design-rationale.md)** — the decisions and the alternatives that were rejected.
 
 ## The 30-second mental model
@@ -72,7 +73,9 @@ report.adf  (a ZIP container)
 
 An agent that wants the content does `unzip -p report.adf content/main.adt` and
 pays for prose tokens only. A human opens it and sees a pixel-perfect page. Same
-file. No reconciliation step, no OCR, no guessing.
+file. No reconciliation step, no OCR, no guessing. The bundled
+[`tools/adf-extract`](tools/adf-extract) is the manifest-aware version of that
+one-liner.
 
 ## License
 

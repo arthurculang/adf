@@ -15,7 +15,8 @@
   },
   "content": {
     "primary": "content/main.adt",
-    "streams": ["content/main.adt"]
+    "streams": ["content/main.adt"],
+    "profile": "adf-text/1.0"
   },
   "layout": {
     "primary": "layout/pages.adl",

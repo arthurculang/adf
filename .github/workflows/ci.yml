@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  build-and-verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build the example container
+        working-directory: examples/quarterly-report
+        run: ./build.sh
+
+      - name: Verify container structure and content extraction
+        run: |
+          set -euo pipefail
+          adf=examples/quarterly-report.adf
+          test -f "$adf" || { echo "FAIL: container not built"; exit 1; }
+
+          # mimetype MUST be the first archive entry (spec §3.1)...
+          first=$(zipinfo -1 "$adf" | head -n1)
+          [ "$first" = "mimetype" ] || { echo "FAIL: first entry is '$first', not 'mimetype'"; exit 1; }
+
+          # ...and stored, not compressed.
+          zipinfo "$adf" mimetype | grep -q ' stor ' || { echo "FAIL: mimetype is not stored"; exit 1; }
+
+          # The literal media type sits at byte offset 38.
+          magic=$(dd if="$adf" bs=1 skip=38 count=15 2>/dev/null)
+          [ "$magic" = "application/adf" ] || { echo "FAIL: bad magic at offset 38: '$magic'"; exit 1; }
+
+          # The content layer extracts as plain text in reading order.
+          unzip -p "$adf" content/main.adt | grep -q "# Q2 Was a Good Quarter" \
+            || { echo "FAIL: content extraction"; exit 1; }
+
+          echo "OK: structure + extraction"
+
+      - name: Verify integrity hashes match the manifest
+        run: |
+          set -euo pipefail
+          adf=examples/quarterly-report.adf
+          for part in content/main.adt layout/pages.adl; do
+            want=$(unzip -p "$adf" manifest.json | grep "\"$part\"" | grep -o 'sha256-[0-9a-f]\{64\}' || true)
+            got="sha256-$(unzip -p "$adf" "$part" | sha256sum | cut -d' ' -f1)"
+            [ -n "$want" ] || { echo "FAIL: no integrity hash for $part in manifest"; exit 1; }
+            [ "$want" = "$got" ] || { echo "FAIL: $part manifest=$want actual=$got"; exit 1; }
+            echo "OK: integrity $part"
+          done
+
+      - name: Reference content reader works
+        run: |
+          set -euo pipefail
+          ./tools/adf-extract examples/quarterly-report.adf | grep -q "# Q2 Was a Good Quarter" \
+            || { echo "FAIL: adf-extract"; exit 1; }
+          echo "OK: adf-extract"

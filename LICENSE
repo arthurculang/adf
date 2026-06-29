@@ -13,7 +13,8 @@ This repository is dual-licensed by path:
 
 2. CODE, EXAMPLES & MACHINE-READABLE ARTIFACTS — Apache-2.0
    Applies to: examples/ (build scripts, .adt / .adl / manifest.json / mimetype
-   and assets) and any tooling added to this repository.
+   and assets), the tools/ directory, CI workflows under .github/, and any
+   other tooling added to this repository.
    Full text: LICENSES/Apache-2.0.txt
    SPDX-License-Identifier: Apache-2.0
 

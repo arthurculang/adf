@@ -2,6 +2,15 @@
 
 A small but complete two-page ADF document, in source form.
 
+> **Status — illustrative.** This example demonstrates the *structure* (the
+> content/layout split, addressable nodes, threaded two-column flow) and the
+> cheap content-extraction path. It is **not** a pixel-fidelity render fixture:
+> the fonts are referenced but not embedded, and the manifest's font
+> `metrics_hash` values are placeholders. A full-fidelity fixture depends on the
+> pinned font-metric and line-break definitions (a spec roadmap item). The
+> `content`/`layout` integrity hashes that `build.sh` writes, however, are real
+> and are checked in CI.
+
 ## Files
 
 | File | Layer | What it is |
